@@ -4,6 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#00090909"
     tools:context=".ProducePostActivity">
 
     <androidx.appcompat.widget.Toolbar
@@ -11,8 +12,7 @@
         android:layout_width="match_parent"
         android:layout_height="85dp"
         android:background="#4E6C35"
-        android:bottomLeftRadius="45dp"
-        android:bottomRightRadius="45dp"
+        android:radius="24dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -20,6 +20,19 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
+
+    <ImageButton
+        android:layout_width="35dp"
+        android:layout_height="35dp"
+        android:background="?attr/actionModeCloseDrawable"
+        android:backgroundTint="#FFFFFF"
+        android:onClick="returnClick"
+        app:layout_constraintBottom_toBottomOf="@+id/addpost_toolbar"
+        app:layout_constraintEnd_toEndOf="@+id/addpost_toolbar"
+        app:layout_constraintHorizontal_bias="0.044"
+        app:layout_constraintStart_toStartOf="@+id/addpost_toolbar"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.457" />
 
     <TextView
         android:id="@+id/textView5"
@@ -31,10 +44,10 @@
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="@+id/addpost_toolbar"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.084"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="@+id/addpost_toolbar"
-        app:layout_constraintVertical_bias="0.439" />
+        app:layout_constraintVertical_bias="0.4" />
 
     <ImageView
         android:id="@+id/post_image"
@@ -69,7 +82,7 @@
         android:id="@+id/producename"
         android:layout_width="374dp"
         android:layout_height="wrap_content"
-        android:hint="ProduceName"
+        android:hint="Produce Name"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/post_image"
         app:layout_constraintHorizontal_bias="0.0"
@@ -81,7 +94,6 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="264dp"
         android:text="Produce Price"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -90,32 +102,73 @@
         app:layout_constraintEnd_toEndOf="@+id/producename"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/producename"
-        app:layout_constraintTop_toBottomOf="@+id/producename" />
+        app:layout_constraintTop_toBottomOf="@+id/producename"
+        app:layout_constraintVertical_bias="0.038" />
 
     <EditText
         android:id="@+id/produceprice"
         android:layout_width="374dp"
         android:layout_height="wrap_content"
-        android:hint="ProducePrice"
+        android:hint="Produce Price"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="@+id/post_image"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView7"
-        app:layout_constraintVertical_bias="0.068" />
+        app:layout_constraintVertical_bias="0.052" />
 
-    <Button
-        android:id="@+id/upload_produce"
+
+    <TextView
+        android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="104dp"
-        android:text="Post"
+        android:text="Produce Comment"
+        android:textColor="@color/black"
+        android:textSize="18sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/producename"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/producename"
+        app:layout_constraintTop_toBottomOf="@+id/producename"
+        app:layout_constraintVertical_bias="0.353" />
+
+    <EditText
+        android:id="@+id/producecomment"
+        android:layout_width="374dp"
+        android:layout_height="wrap_content"
+        android:hint="Produce Comment"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/post_image"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/textView7"
+        app:layout_constraintTop_toBottomOf="@+id/textView7"
+        app:layout_constraintVertical_bias="0.443" />
+
+    <RelativeLayout
+        android:layout_width="200dp"
+        android:layout_height="60dp"
+        android:layout_centerInParent="true"
+        android:layout_marginBottom="30dp"
+        android:background="@drawable/bg_productbutton"
+        android:onClick="product_post"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent" />
+        app:layout_constraintHorizontal_bias="0.511"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/producecomment">
 
-
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="Post"
+            android:textAllCaps="true"
+            android:textColor="@color/white"
+            android:textSize="20sp" />
+    </RelativeLayout>
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
