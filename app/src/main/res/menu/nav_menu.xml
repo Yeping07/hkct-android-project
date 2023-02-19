@@ -27,6 +27,11 @@
         android:onClick="menu6_click"
         android:title="Membership" />
 
+    <item
+        android:id="@+id/nav_shop"
+        android:onClick="menu8_click"
+        android:title="Shop" />
+
 <!--    <item-->
 <!--        android:id="@+id/nav_qrcode"-->
 <!--        android:onClick="menu7_click"-->
