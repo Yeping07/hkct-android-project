@@ -15,7 +15,7 @@ public class ShopActivity extends AppCompatActivity {
     }
 
     public void addClick(View v) {
-        startActivity(new Intent(this, ProducePostActivity.class));
+        startActivity(new Intent(this, ProductPostActivity.class));
 
         int version = Integer.valueOf(android.os.Build.VERSION.SDK);
         if (version >= 5) {

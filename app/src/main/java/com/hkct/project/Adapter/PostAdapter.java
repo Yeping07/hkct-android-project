@@ -9,7 +9,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -245,7 +244,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         }
 
         public void setPostCaption(String caption) {
-            postCaption = mView.findViewById(R.id.caption_tv);
+            postCaption = mView.findViewById(R.id.product_name);
             postCaption.setText(caption);
         }
     }

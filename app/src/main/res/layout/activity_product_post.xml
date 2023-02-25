@@ -4,15 +4,19 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#00090909"
-    tools:context=".ProducePostActivity">
+    android:background="@drawable/product_formbg"
+    tools:context=".ProductPostActivity">
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="#BEFFFFFF"/>
 
     <androidx.appcompat.widget.Toolbar
         android:id="@+id/addpost_toolbar"
         android:layout_width="match_parent"
         android:layout_height="85dp"
         android:background="#4E6C35"
-        android:radius="24dp"
         android:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
@@ -50,7 +54,7 @@
         app:layout_constraintVertical_bias="0.4" />
 
     <ImageView
-        android:id="@+id/post_image"
+        android:id="@+id/post_product"
         android:layout_width="374dp"
         android:layout_height="204dp"
         android:background="@drawable/add"
@@ -67,26 +71,26 @@
         android:id="@+id/textView6"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Produce Name"
+        android:text="Product Name"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/post_image"
-        app:layout_constraintTop_toBottomOf="@+id/post_image"
+        app:layout_constraintStart_toStartOf="@+id/post_product"
+        app:layout_constraintTop_toBottomOf="@+id/post_product"
         app:layout_constraintVertical_bias="0.053" />
 
     <EditText
-        android:id="@+id/producename"
+        android:id="@+id/productname"
         android:layout_width="374dp"
         android:layout_height="wrap_content"
-        android:hint="Produce Name"
+        android:hint="Product Name"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/post_image"
+        app:layout_constraintEnd_toEndOf="@+id/post_product"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/post_image"
+        app:layout_constraintStart_toStartOf="@+id/post_product"
         app:layout_constraintTop_toBottomOf="@+id/textView6"
         app:layout_constraintVertical_bias="0.037" />
 
@@ -94,24 +98,24 @@
         android:id="@+id/textView7"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Produce Price"
+        android:text="Product Price"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/producename"
+        app:layout_constraintEnd_toEndOf="@+id/productname"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/producename"
-        app:layout_constraintTop_toBottomOf="@+id/producename"
+        app:layout_constraintStart_toStartOf="@+id/productname"
+        app:layout_constraintTop_toBottomOf="@+id/productname"
         app:layout_constraintVertical_bias="0.038" />
 
     <EditText
-        android:id="@+id/produceprice"
+        android:id="@+id/productprice"
         android:layout_width="374dp"
         android:layout_height="wrap_content"
-        android:hint="Produce Price"
+        android:hint="Product Price"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/post_image"
+        app:layout_constraintEnd_toEndOf="@+id/post_product"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView7"
@@ -122,24 +126,24 @@
         android:id="@+id/textView8"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Produce Comment"
+        android:text="Product Comment"
         android:textColor="@color/black"
         android:textSize="18sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/producename"
+        app:layout_constraintEnd_toEndOf="@+id/productname"
         app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="@+id/producename"
-        app:layout_constraintTop_toBottomOf="@+id/producename"
+        app:layout_constraintStart_toStartOf="@+id/productname"
+        app:layout_constraintTop_toBottomOf="@+id/productname"
         app:layout_constraintVertical_bias="0.353" />
 
     <EditText
-        android:id="@+id/producecomment"
+        android:id="@+id/productcomment"
         android:layout_width="374dp"
         android:layout_height="wrap_content"
-        android:hint="Produce Comment"
+        android:hint="Product Comment"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/post_image"
+        app:layout_constraintEnd_toEndOf="@+id/post_product"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="@+id/textView7"
         app:layout_constraintTop_toBottomOf="@+id/textView7"
@@ -151,21 +155,24 @@
         android:layout_centerInParent="true"
         android:layout_marginBottom="30dp"
         android:background="@drawable/bg_productbutton"
-        android:onClick="product_post"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.511"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/producecomment">
+        app:layout_constraintTop_toBottomOf="@+id/productcomment">
 
-        <TextView
+        <Button
+            android:id="@+id/btn_product_post"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
+            android:background="@drawable/bg_productbutton"
             android:gravity="center"
-            android:text="Post"
             android:textAllCaps="true"
             android:textColor="@color/white"
-            android:textSize="20sp" />
+            android:textSize="20sp"
+            android:text="Post"
+            android:onClick="product_post"/>
+
     </RelativeLayout>
 
 
