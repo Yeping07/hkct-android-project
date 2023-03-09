@@ -222,6 +222,14 @@ public class DiscoverActivity extends AppCompatActivity {
         drawerLayout.closeDrawers();
     }
 
+    //   Shop
+    public void menu8_click(MenuItem menuItem) {
+        Log.d(TAG, "menu8_click()->" + menuItem.getItemId() + "," + menuItem.getTitle());
+        startActivity(new Intent(this, ShopActivity.class));
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        drawerLayout.closeDrawers();
+    }
+
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         getMenuInflater().inflate(R.menu.posts_add, menu);

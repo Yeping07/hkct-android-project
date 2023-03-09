@@ -177,6 +177,14 @@ public class QRcodeActivity extends AppCompatActivity implements View.OnClickLis
             drawerLayout.closeDrawers();
         }
 
+        //   Shop
+        public void menu8_click(MenuItem menuItem) {
+            Log.d(TAG, "menu8_click()->" + menuItem.getItemId() + "," + menuItem.getTitle());
+            startActivity(new Intent(this, ShopActivity.class));
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            drawerLayout.closeDrawers();
+        }
+
     @Override
     public void onClick(View v) {
         getCode();
