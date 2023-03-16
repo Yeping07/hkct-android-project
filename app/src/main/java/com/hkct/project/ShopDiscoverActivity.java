@@ -1,13 +1,10 @@
 package com.hkct.project;
 
-import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -39,10 +36,9 @@ import com.hkct.project.Model.Users;
 import java.util.ArrayList;
 import java.util.List;
 
-public class ShopActivity extends AppCompatActivity {
+public class ShopDiscoverActivity extends AppCompatActivity {
 
-    private final String TAG="ShopActivity===>";
-    private ImageButton imageButton;
+    private final String TAG="ShopDiscoverActivity===>";
     private TextView txtOutput;
     private DrawerLayout drawerLayout;
     private NavigationView navView;
@@ -57,32 +53,22 @@ public class ShopActivity extends AppCompatActivity {
     private ListenerRegistration listenerRegistration;
     private List<Users> usersList;
 
-    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_shop);
+        setContentView(R.layout.activity_shop_discover);
         firebaseAuth = FirebaseAuth.getInstance();
         Firestore = FirebaseFirestore.getInstance();
 
-        mRecyclerview = findViewById(R.id.recycler_view);
+        mRecyclerview = findViewById(R.id.recyclerview);
 
         mRecyclerview.setHasFixedSize(true);
-        mRecyclerview.setLayoutManager(new LinearLayoutManager(ShopActivity.this));
+        mRecyclerview.setLayoutManager(new LinearLayoutManager(ShopDiscoverActivity.this));
 
         list = new ArrayList<>();
         usersList = new ArrayList<>();
-        adapter = new PostAdapter(ShopActivity.this, list, usersList);
+        adapter = new PostAdapter(ShopDiscoverActivity.this, list, usersList);
         mRecyclerview.setAdapter(adapter);
-
-        imageButton = findViewById(R.id.create_post);
-        imageButton.setOnClickListener (new View.OnClickListener () {
-            @Override
-            public void onClick (View view) {
-                Intent intent = new Intent (ShopActivity.this,ProductPostActivity.class);
-                startActivity (intent);
-            }
-        });
 
         if (firebaseAuth.getCurrentUser() != null) {
             mRecyclerview.addOnScrollListener(new RecyclerView.OnScrollListener() {
@@ -91,14 +77,14 @@ public class ShopActivity extends AppCompatActivity {
                     super.onScrolled(recyclerView, dx, dy);
                     Boolean isBottom = !mRecyclerview.canScrollVertically(1);
                     if (isBottom)
-                        Toast.makeText(ShopActivity.this, "Reached Bottom", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(ShopDiscoverActivity.this, "Reached Bottom", Toast.LENGTH_SHORT).show();
                 }
             });
 
             // get all users posts
             query = Firestore.collection("Product").orderBy("time", Query.Direction.DESCENDING);
 
-            listenerRegistration = query.addSnapshotListener(ShopActivity.this, new EventListener<QuerySnapshot>() {
+            listenerRegistration = query.addSnapshotListener(ShopDiscoverActivity.this, new EventListener<QuerySnapshot>() {
                 @Override
                 public void onEvent(@Nullable QuerySnapshot value, @Nullable FirebaseFirestoreException error) {
                     for (DocumentChange doc : value.getDocumentChanges()) {
@@ -115,7 +101,7 @@ public class ShopActivity extends AppCompatActivity {
                                         list.add(post);
                                         adapter.notifyDataSetChanged();
                                     } else {
-                                        Toast.makeText(ShopActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(ShopDiscoverActivity.this, task.getException().getMessage(), Toast.LENGTH_SHORT).show();
                                     }
                                 }
                             });
@@ -136,7 +122,7 @@ public class ShopActivity extends AppCompatActivity {
         super.onStart();
         FirebaseUser currentUser = firebaseAuth.getCurrentUser();
         if (currentUser == null) {
-            startActivity(new Intent(ShopActivity.this, LoginActivity.class));
+            startActivity(new Intent(ShopDiscoverActivity.this, LoginActivity.class));
             finish();
         } else {
             String currentUserId = firebaseAuth.getCurrentUser().getUid();
@@ -145,7 +131,7 @@ public class ShopActivity extends AppCompatActivity {
                 public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                     if (task.isSuccessful()) {
                         if (!task.getResult().exists()) {
-                            startActivity(new Intent(ShopActivity.this, SetUpActivity.class));
+                            startActivity(new Intent(ShopDiscoverActivity.this, SetUpActivity.class));
                             finish();
                         }
                     }
@@ -252,14 +238,14 @@ public class ShopActivity extends AppCompatActivity {
     }
 
     public void menu_add_post_click(MenuItem m) {
-        startActivity(new Intent(ShopActivity.this, AddPostActivity.class));
+        startActivity(new Intent(ShopDiscoverActivity.this, AddPostActivity.class));
     }
 
     public void menu_logout_click(MenuItem m) {
         startActivity(new Intent(getApplicationContext(),LoginActivity.class));
         FirebaseAuth.getInstance().signOut();
         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-        Toast.makeText(ShopActivity.this, "Logout successful", Toast.LENGTH_SHORT).show();
+        Toast.makeText(ShopDiscoverActivity.this, "Logout successful", Toast.LENGTH_SHORT).show();
     }
 
     //    public void menu4_click(MenuItem menuItem) {
@@ -271,5 +257,4 @@ public class ShopActivity extends AppCompatActivity {
 //        Toast.makeText(DiscoverActivity.this, "Logout successful", Toast.LENGTH_SHORT).show();
 //        drawerLayout.closeDrawers();
 //    }
-
 }

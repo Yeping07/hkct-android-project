@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -25,9 +26,13 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.QueryDocumentSnapshot;
 import com.google.firebase.firestore.QuerySnapshot;
+import com.hkct.project.AddPostActivity;
 import com.hkct.project.CommentsActivity;
+import com.hkct.project.LikesActivity;
 import com.hkct.project.Model.Post;
 import com.hkct.project.Model.Users;
+import com.hkct.project.OtherProfileActivity;
+import com.hkct.project.ProfileActivity;
 import com.hkct.project.R;
 
 import java.text.DateFormat;
@@ -92,6 +97,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                         if (!task.getResult().exists()) {
                             Map<String, Object> likesMap = new HashMap<>();
                             likesMap.put("timestamp", FieldValue.serverTimestamp());
+                            likesMap.put("user", currentUserId);
                             firestore.collection("Posts/" + postId + "/Likes").document(currentUserId).set(likesMap);
                         } else {
                             firestore.collection("Posts/" + postId + "/Likes").document(currentUserId).delete();
@@ -137,6 +143,35 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
                 Intent commentIntent = new Intent(context, CommentsActivity.class);
                 commentIntent.putExtra("postid", postId);
                 context.startActivity(commentIntent);
+            }
+        });
+
+        //likes detail implementation
+        holder.postLikes.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent likeIntent = new Intent(context, LikesActivity.class);
+                likeIntent.putExtra("postid", postId);
+                context.startActivity(likeIntent);
+            }
+        });
+
+        // other profile implementation
+        holder.postUsername.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Log.d("hello","abc123");
+                String otherUserUid = mList.get(position).getUser();
+                String currentUserUid = FirebaseAuth.getInstance().getCurrentUser().getUid();
+
+                Intent profileIntent;
+                if (otherUserUid.equals(currentUserUid)) {
+                    profileIntent = new Intent(context, ProfileActivity.class);
+                } else {
+                    profileIntent = new Intent(context, OtherProfileActivity.class);
+                    profileIntent.putExtra("otherUserUid", otherUserUid);
+                }
+                context.startActivity(profileIntent);
             }
         });
 
@@ -215,11 +250,11 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
             likePic = mView.findViewById(R.id.like_btn);
             commentsPic = mView.findViewById(R.id.comments_post);
             deleteBtn = mView.findViewById(R.id.delete_btn);
+            postLikes = mView.findViewById(R.id.like_count_tv);
             membershipIcon = mView.findViewById(R.id.membership_icon_post);
         }
 
         public void setPostLikes(int count) {
-            postLikes = mView.findViewById(R.id.like_count_tv);
             postLikes.setText(count + " Likes");
         }
 
@@ -244,7 +279,7 @@ public class PostAdapter extends RecyclerView.Adapter<PostAdapter.PostViewHolder
         }
 
         public void setPostCaption(String caption) {
-            postCaption = mView.findViewById(R.id.product_name);
+            postCaption = mView.findViewById(R.id.caption_tv);
             postCaption.setText(caption);
         }
     }

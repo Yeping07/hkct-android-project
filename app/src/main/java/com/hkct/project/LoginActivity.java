@@ -1,8 +1,5 @@
 package com.hkct.project;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -13,6 +10,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -43,7 +43,9 @@ public class LoginActivity extends AppCompatActivity {
         getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
         inputEmail = findViewById(R.id.inputEmail);
+        inputEmail.setText("amy@example.com");
         inputPassword = findViewById(R.id.inputPassword);
+        inputPassword.setText("amy123");
         btnLogin = findViewById(R.id.btnLogin);
 //        btnDebug = findViewById(R.id.btnDebug);
         progressDialog = new ProgressDialog(this);
